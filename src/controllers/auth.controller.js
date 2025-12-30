@@ -34,7 +34,6 @@ export const login = async (req, res, next) => {
     const { email, password } = req.body;
     const validUser = await User.findOne({ email });
     const validPassword = await bcrypt.compare(password, validUser.password);
-    console.log(validUser, validPassword);
     if (!validUser || validUser.status == "deactive" || !validPassword) {
       return next(new AppError("Credentials are invalid", 404));
     }
